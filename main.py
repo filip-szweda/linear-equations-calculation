@@ -1,5 +1,4 @@
 import math
-import time
 
 import matrix
 import solvers
@@ -7,46 +6,40 @@ import solvers
 
 # Filip Szweda 184738
 
-def zadanie_A():
+def zadanie_a():
     a1 = 5 + 7
     a2 = -1
     a3 = -1
     N = 938
     A = matrix.Matrix((N, N))
-    A.band((a1, a2, a3))
+    A.set_band((a1, a2, a3))
 
     f = 4
-    b = [math.sin(i * (f + 1)) for i in range(N)]
+    b = matrix.Matrix([[math.sin(i * (f + 1))] for i in range(N)])
 
     return A, b
 
 
-def zadanieB(A, b):
-    start = time.time()
-    iterationsJ = solvers.Jacobi(A, b)
-    timeJ = time.time() - start
-
-    start = time.time()
-    iterationsGS = solvers.GaussSeidel(A, b)
-    timeGS = time.time() - start
-
-    return iterationsJ, iterationsGS, timeJ, timeGS
+def zadanie_b(A: matrix.Matrix, b: matrix.Matrix):
+    iterations_j, time_j = solvers.jacobi(A, b)
+    # iterations_gs, time_gs = solvers.gauss_seidel(A, b)
+    return iterations_j, time_j
 
 
-def zadanieC(b):
+def zadanie_c(b: matrix.Matrix):
     a1 = 3
     a2 = -1
     a3 = -1
     N = 938
     A = matrix.Matrix((N, N))
-    A.band((a1, a2, a3))
+    A.set_band((a1, a2, a3))
 
-    iterationsJ = solvers.Jacobi(A, b)
-
-    iterationsGS = solvers.GaussSeidel(A, b)
+    iterations_j, _ = solvers.jacobi(A, b)
+    # iterations_gs, _ = solvers.gauss_seidel(A, b)
 
 
 if __name__ == '__main__':
-    A, b = zadanie_A()
-    iterationsJ, iterationsGS, timeJ, timeGS = zadanieB(A, b)
-    zadanieC(b)
+    A, b = zadanie_a()
+    iterations_j, time_j = zadanie_b(A, b)
+    print("Iterations (Jacobi): " + str(iterations_j) + ", Time (Jacobi, in seconds): " + str(time_j))
+    zadanie_c(b)
