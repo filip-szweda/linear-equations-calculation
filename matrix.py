@@ -31,6 +31,20 @@ class Matrix:
             hollow.data[i][i] = 0
         return hollow
 
+    def get_lower_triangular_matrix(self):
+        lower_triangular = Matrix(self.size)
+        for row in range(self.size[0]):
+            for col in range(row):
+                lower_triangular.data[row][col] = self.data[row][col]
+        return lower_triangular
+
+    def get_upper_triangular_matrix(self):
+        upper_triangular = Matrix(self.size)
+        for row in range(self.size[0]):
+            for col in range(row + 1, self.size[1]):
+                upper_triangular.data[row][col] = self.data[row][col]
+        return upper_triangular
+
     def copy(self):
         result = Matrix(self.size)
         result.data = copy.deepcopy(self.data)

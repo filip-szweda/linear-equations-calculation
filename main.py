@@ -22,8 +22,8 @@ def zadanie_a():
 
 def zadanie_b(A: matrix.Matrix, b: matrix.Matrix):
     iterations_j, time_j = solvers.jacobi(A, b)
-    # iterations_gs, time_gs = solvers.gauss_seidel(A, b)
-    return iterations_j, time_j
+    iterations_gs, time_gs = solvers.gauss_seidel(A, b)
+    return iterations_j, time_j, iterations_gs, time_gs
 
 
 def zadanie_c(b: matrix.Matrix):
@@ -35,11 +35,12 @@ def zadanie_c(b: matrix.Matrix):
     A.set_band((a1, a2, a3))
 
     iterations_j, _ = solvers.jacobi(A, b)
-    # iterations_gs, _ = solvers.gauss_seidel(A, b)
+    iterations_gs, _ = solvers.gauss_seidel(A, b)
 
 
 if __name__ == '__main__':
     A, b = zadanie_a()
-    iterations_j, time_j = zadanie_b(A, b)
+    iterations_j, time_j, iterations_gs, time_gs = zadanie_b(A, b)
     print("Iterations (Jacobi): " + str(iterations_j) + ", Time (Jacobi, in seconds): " + str(time_j))
+    print("Iterations (Gauss-Seidl): " + str(iterations_gs) + ", Time (Gauss-Seidl, in seconds): " + str(time_gs))
     zadanie_c(b)
