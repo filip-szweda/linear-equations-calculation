@@ -42,11 +42,10 @@ def lu_factorization(A: matrix.Matrix):
     for i in range(A.size[0]):
         L.data[i][i] = 1
     for i in range(A.size[0]):
-        print(i)
-        for j in range(i + 1, A.size[0]):
-            L.data[j][i] = U.data[j][i] / U.data[i][i]
-            for k in range(j, A.size[0]):
-                U.data[j][k] = U.data[j][k] - L.data[j][i] * U.data[i][k]
+        for j in range(i+1, A.size[0]):
+            L.data[j][i] = U.data[i][j] / U.data[i][i]
+            for k in range(i, A.size[0]):
+                U.data[j][k] -= L.data[j][i] * U.data[i][k]
     return L, U
 
 

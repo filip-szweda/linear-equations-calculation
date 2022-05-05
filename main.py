@@ -15,7 +15,7 @@ def zadanie_a():
     A.set_band((a1, a2, a3))
 
     f = 4
-    b = matrix.Matrix([[math.sin(i * (f + 1))] for i in range(1, N + 1)])
+    b = matrix.Matrix([[math.sin(i * (f + 1))] for i in range(N)])
 
     return A, b
 
@@ -56,4 +56,4 @@ if __name__ == '__main__':
     # print("Iterations (Jacobi): " + str(len(norm_res_j)) + ", Time (Jacobi, in seconds): " + str(time_j))
     # print("Iterations (Gauss-Seidl): " + str(len(norm_res_gs)) + ", Time (Gauss-Seidl, in seconds): " + str(time_gs))
     # zadanie_c(b)
-    # zadanie_d(b)
+    zadanie_d(b)
