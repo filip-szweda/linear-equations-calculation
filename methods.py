@@ -40,8 +40,6 @@ def lu(A, b):
     L, U = helpers.lu_factorization(A)
     y = helpers.forward_substitution(L, b)
     x = helpers.backward_substitution(U, y)
-    print(x.values[0][0])
-    print(x.values[x.size[0] - 1][x.size[1] - 1])
     norm_res_lu = helpers.norm(helpers.residuum(A, x, b))
     time_lu = time.time() - start
     return norm_res_lu, time_lu
