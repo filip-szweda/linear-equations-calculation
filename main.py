@@ -79,6 +79,7 @@ def plot_e():
     pyplot.plot(unknowns_numbers, times_j, label='Jacobi')
     pyplot.plot(unknowns_numbers, times_gs, label='Gauss-Seidel')
     pyplot.plot(unknowns_numbers, times_lu, label='LU')
+    pyplot.yscale("log")
     pyplot.xlabel('Matrix size')
     pyplot.ylabel('Execution time [s]')
     pyplot.title('Linear equations calculation methods execution times')
