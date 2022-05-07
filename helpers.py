@@ -37,10 +37,9 @@ def residuum(A, r, b):
 
 
 def lu_factorization(A):
-    U = A.copy()
+    U = A.duplicate()
     L = matrix.identity_matrix(A.size)
     for i in range(A.size[0]):
-        print(i)
         for j in range(i + 1, A.size[0]):
             L.values[j][i] = U.values[i][j] / U.values[i][i]
             for k in range(i, A.size[0]):

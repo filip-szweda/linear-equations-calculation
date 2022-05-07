@@ -22,7 +22,7 @@ class Matrix:
 
     # hollow matrix combines non-zero values of lower triangular matrix and upper triangular matrix
     def get_hollow_matrix(self):
-        hollow = self.copy()
+        hollow = self.duplicate()
         for i in range(hollow.size[0]):
             hollow.values[i][i] = 0
         return hollow
@@ -41,7 +41,7 @@ class Matrix:
                 upper_triangular.values[row][col] = self.values[row][col]
         return upper_triangular
 
-    def copy(self):
+    def duplicate(self):
         result = Matrix(self.size)
         result.values = copy.deepcopy(self.values)
         return result
@@ -70,7 +70,7 @@ class Matrix:
                         result.values[row][col] += self.values[row][i] * other.values[i][col]
             return result
         else:
-            result = self.copy()
+            result = self.duplicate()
             for row in range(result.size[0]):
                 for col in range(result.size[1]):
                     result.values[row][col] *= other

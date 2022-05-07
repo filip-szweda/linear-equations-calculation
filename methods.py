@@ -12,6 +12,7 @@ def jacobi(A, b):
     second_term = helpers.forward_substitution(D, b)
     start = time.time()
     while helpers.norm(helpers.residuum(A, r, b)) > 10 ** -9:
+        # print(helpers.norm(helpers.residuum(A, r, b)))
         norm_res_j.append(helpers.norm(helpers.residuum(A, r, b)))
         first_term = helpers.forward_substitution(D * -1, H * r)
         r = first_term + second_term
@@ -29,6 +30,7 @@ def gauss_seidel(A, b):
     norm_res_gs = []
     start = time.time()
     while helpers.norm(helpers.residuum(A, r, b)) > 10 ** -9:
+        # print(helpers.norm(helpers.residuum(A, r, b)))
         norm_res_gs.append(helpers.norm(helpers.residuum(A, r, b)))
         r = helpers.forward_substitution(first_term, U * r) + second_term
     time_gs = time.time() - start

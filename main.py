@@ -76,6 +76,8 @@ def plot_e():
             times_gs.append(time)
         else:
             times_lu.append(time)
+    font = {'family': 'Arial', 'size': 10}
+    pyplot.rc('font', **font)
     pyplot.plot(unknowns_numbers, times_j, label='Jacobi')
     pyplot.plot(unknowns_numbers, times_gs, label='Gauss-Seidel')
     pyplot.plot(unknowns_numbers, times_lu, label='LU')
@@ -88,7 +90,7 @@ def plot_e():
 
 
 if __name__ == '__main__':
-    # A, b = zadanie_a()
+    A, b = zadanie_a()
 
     # norm_res_j, time_j, norm_res_gs, time_gs = zadanie_b(A, b)
     # print("[Jacobi] Iterations: " + str(len(norm_res_j)) + ", Time (in seconds): " + str(time_j))
@@ -97,8 +99,8 @@ if __name__ == '__main__':
     # zadanie_c(b)
 
     # norm_res_lu, time_lu = zadanie_d(b)
-    # print("[LU] Norm from residuum: " + str(norm_res_lu) + ", Time (in seconds): " + str(time_lu))
+    # print("[LU] Norm from residuum: " + str(norm_res_lu))
 
     # zadanie_e()
 
-    plot_e()
+    # plot_e()
