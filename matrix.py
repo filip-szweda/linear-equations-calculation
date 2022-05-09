@@ -2,16 +2,48 @@ import copy
 
 
 class Matrix:
-    size: tuple[int, int]
-    values: list[list]
-
-    def __init__(self, arg):
-        if type(arg) is tuple:
-            self.size = arg
+    def __init__(self, argument):
+        if type(argument) is list:
+            self.size = (len(argument), len(argument[0]))
+            self.values = argument
+        elif type(argument) is tuple:
+            self.size = argument
             self.values = [[0] * self.size[1] for _ in range(self.size[0])]
-        elif type(arg) is list:
-            self.size = (len(arg), len(arg[0]))
-            self.values = arg
+
+    def __add__(self, other):
+        sum = Matrix((self.size[0], self.size[1]))
+        for row in range(self.size[0]):
+            for col in range(self.size[1]):
+                sum.values[row][col] = self.values[row][col] + other.values[row][col]
+        return sum
+
+    def __sub__(self, other):
+        difference = Matrix((self.size[0], self.size[1]))
+        for row in range(self.size[0]):
+            for col in range(self.size[1]):
+                difference.values[row][col] = self.values[row][col] - other.values[row][col]
+        return difference
+
+    def __mul__(self, other):
+        if type(other) is Matrix:
+            product = Matrix((self.size[0], other.size[1]))
+            for row in range(product.size[0]):
+                for col in range(product.size[1]):
+                    product.values[row][col] = 0
+                    for i in range(self.size[1]):
+                        product.values[row][col] += self.values[row][i] * other.values[i][col]
+            return product
+        else:
+            product = self.duplicate()
+            for row in range(product.size[0]):
+                for col in range(product.size[1]):
+                    product.values[row][col] *= other
+            return product
+
+    def duplicate(self):
+        duplicate = Matrix(self.size)
+        duplicate.values = copy.deepcopy(self.values)
+        return duplicate
 
     def get_diagonal_matrix(self):
         diagonal = Matrix(self.size)
@@ -40,41 +72,6 @@ class Matrix:
             for col in range(row + 1, self.size[1]):
                 upper_triangular.values[row][col] = self.values[row][col]
         return upper_triangular
-
-    def duplicate(self):
-        result = Matrix(self.size)
-        result.values = copy.deepcopy(self.values)
-        return result
-
-    def __add__(self, other):
-        result = Matrix((self.size[0], self.size[1]))
-        for row in range(self.size[0]):
-            for col in range(self.size[1]):
-                result.values[row][col] = self.values[row][col] + other.values[row][col]
-        return result
-
-    def __sub__(self, other):
-        result = Matrix((self.size[0], self.size[1]))
-        for row in range(self.size[0]):
-            for col in range(self.size[1]):
-                result.values[row][col] = self.values[row][col] - other.values[row][col]
-        return result
-
-    def __mul__(self, other):
-        if type(other) is Matrix:
-            result = Matrix((self.size[0], other.size[1]))
-            for row in range(result.size[0]):
-                for col in range(result.size[1]):
-                    result.values[row][col] = 0
-                    for i in range(self.size[1]):
-                        result.values[row][col] += self.values[row][i] * other.values[i][col]
-            return result
-        else:
-            result = self.duplicate()
-            for row in range(result.size[0]):
-                for col in range(result.size[1]):
-                    result.values[row][col] *= other
-            return result
 
 
 def band_matrix(size, values):
